@@ -1,7 +1,7 @@
 apiVersion: v1alpha1
 kind: AgentConfig
 metadata:
-  name: ocp
+  name: cluster1
 rendezvousIP: 10.1.0.11
 hosts:
   - hostname: cp1 # Control Plane 1
