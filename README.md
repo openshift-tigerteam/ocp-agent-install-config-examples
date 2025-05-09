@@ -27,7 +27,7 @@ openshift-install agent wait-for bootstrap-complete --dir=install --log-level=de
 openshift-install agent wait-for install-complete --dir=install --log-level=debug
 ```
 
-## Post Install
+# Post Install
 
 ``` bash
 oc delete pods --all-namespaces --field-selector=status.phase=Succeeded
