@@ -5,6 +5,9 @@
 * Download Red Hat Enterprise Linux 9.x Binary DVD from https://access.redhat.com/downloads/content/rhel
 * Boot host from ISO and perform install as Server with GUI
 * Make sure to enable SSH for user
+* Reboot and SSH into bastion host as administrative user
+
+> **Everything from here on out is done on the bastion host.**
 
 ## Register Bastion RHEL Box
 ```
@@ -41,6 +44,13 @@ cp install-config.yaml agent-config.yaml install
 openshift-install agent create image --dir=install --log-level=debug
 ```
 
+Copy the ISO to the storage where you can boot from. 
+```
+scp snimmo@192.168.122.187:/home/snimmo/ocp/install/agent.x86_64.iso ~/iso/
+```
+
+Boot hosts with created ISO
+
 ```shell
 openshift-install agent wait-for bootstrap-complete --dir=install --log-level=debug
 ```
@@ -48,6 +58,8 @@ openshift-install agent wait-for bootstrap-complete --dir=install --log-level=de
 ```shell
 openshift-install agent wait-for install-complete --dir=install --log-level=debug
 ```
+
+> You don't have to do the bootstrap-complete command at all, you can just run the install-complete...
 
 # Post Install
 
