@@ -1,0 +1,35 @@
+apiVersion: v1alpha1
+kind: AgentConfig
+metadata:
+  name: sno
+rendezvousIP: 10.1.0.1
+hosts:
+  - hostname: control-plane-0
+    role: master
+    interfaces:
+      - name: eno1
+        macAddress: A1:B2:3C:4D:5E:11
+    rootDeviceHints:
+      deviceName: "/dev/sda"
+    networkConfig:
+      interfaces:
+        - name: eno1
+          type: ethernet
+          state: up
+          mac-address: A1:B2:3C:4D:5E:11
+          ipv4:
+            enabled: true
+            address:
+              - ip: 10.1.0.11
+                prefix-length: 24
+            dhcp: false
+      dns-resolver:
+        config:
+          server:
+            - 10.1.0.2
+      routes:
+        config:
+          - destination: 0.0.0.0/0
+            next-hop-address: 10.1.0.1
+            next-hop-interface: eno1
+            table-id: 254
