@@ -11,7 +11,7 @@
 
 ## Register Bastion RHEL Box
 ```
-sudo subscription-manager register
+sudo subscription-manager register # Enter username/password
 sudo subscription-manager repos --enable=rhel-9-for-x86_64-baseos-rpms
 sudo subscription-manager repos --enable=rhel-9-for-x86_64-appstream-rpms
 sudo dnf update -y
@@ -29,7 +29,7 @@ sudo mv openshift-install /usr/local/bin/
 sudo mv oc /usr/local/bin/
 sudo chmod +x /usr/local/bin/openshift-install /usr/local/bin/oc
 
-sudo dnf install -y nmstate
+sudo dnf install -y nmstate git
 ```
 
 # Install Commands
@@ -66,4 +66,11 @@ openshift-install agent wait-for install-complete --dir=install --log-level=debu
 ```shell
 oc delete pods --all-namespaces --field-selector=status.phase=Succeeded
 oc delete pods --all-namespaces --field-selector=status.phase=Failed
+```
+
+## Install ODF
+
+```shell
+git clone https://github.com/openshift-tigerteam/ocp-agent-install-config-examples.git
+oc apply -f ocp-agent-install-config-examples/postinstall/openshift-data-foundation.yaml
 ```
