@@ -74,3 +74,11 @@ oc delete pods --all-namespaces --field-selector=status.phase=Failed
 git clone https://github.com/openshift-tigerteam/ocp-agent-install-config-examples.git
 oc apply -f ocp-agent-install-config-examples/postinstall/openshift-data-foundation.yaml
 ```
+
+### Wiping Disks
+```shell
+ssh -i ~/.ssh/ocp core@10.3.0.11
+sudo fdisk /dev/nvme0n1
+g
+w
+```
