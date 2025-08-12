@@ -61,7 +61,7 @@ git -v
 ```
 
 ### Get the Pull Secret
-Pull Secret is available at https://console.redhat.com/openshift/install/pull-secret
+Pull Secret is available at https://console.redhat.com/openshift/install/pull-secret  
 Download to `~/.pull-secret`
 
 ### Create SSH Key
