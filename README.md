@@ -3,7 +3,9 @@
 ## Gather the Machine Information
 
 | Type | Hostname | Interface | MAC Address | IP Address | Disk Hint |
+| ---   | ---   | ---   | ---   | ---   | --- |
 | cp | cp-1 | eno1 | A0-B1-C2-D3-E4-F5 | 10.1.0.12 | /dev/sda |
+|  |  | eno2 | A0-B1-C2-D3-E4-F5 |  |  |
 | cp | cp-2 | eno1 | A0-B1-C2-D3-E4-F5 | 10.1.0.13 | /dev/sda |
 | cp | cp-3 | eno1 | A0-B1-C2-D3-E4-F5 | 10.1.0.14 | /dev/sda |
 | w | worker-1 | eno1 | A0-B1-C2-D3-E4-F5 | 10.1.0.15 | /dev/sda |
