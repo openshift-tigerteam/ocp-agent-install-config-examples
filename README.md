@@ -127,4 +127,18 @@ oc delete pods --all-namespaces --field-selector=status.phase=Failed
 * Configuring Firewall - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/installation_configuration/configuring-firewall#configuring-firewall_configuring-firewall
 * Network Connectivity Requirements - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#installation-network-connectivity-user-infra_installing-bare-metal
 * Ensuring required ports are open - https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html-single/installing_on_bare_metal/index#network-requirements-ensuring-required-ports-are-open_ipi-install-prerequisites
-* 
+
+
+## Install Debugging
+
+### Modify the Boot Parameters (GRUB/Boot Menu)
+
+This is often the most reliable way to get a shell or verbose output when direct TTY switching fails. You'll need to intercept the boot process.
+
+* Reboot the machine with the ISO.
+* At the GRUB (bootloader) menu: As soon as you see the initial boot menu (often "OpenShift Installer" or similar), press an arrow key (up/down) to stop the automatic countdown.
+* Edit the boot entry:
+  * Select the installer's default boot entry (usually the first one).
+  * Press the e key to edit the boot parameters.
+  * Locate the linux or linuxefi line: This line contains the kernel arguments.
+  * Add debug/shell parameters to force an emergency shell. Go to the end of the linux or linuxefi line and add `rd.break` or `rd.break=pre-mount`. This will drop you into an initramfs shell before the root filesystem is mounted. It's a very minimal environment but allows ip a show, dmesg, and looking at files in the initramfs.
