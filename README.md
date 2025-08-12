@@ -5,8 +5,8 @@
 | Variable                  | Example Value             | Description                                 | 
 | ---                       | ---                       | ---                                         |
 | Bastion IP                | 10.1.0.4                  | IP or hostname for the bastion host         |
-| DNS                       | dns1.basedomain.com,<etc> | IP or hostname for the DNS hosts            |
-| NTP                       | ntp.basedomain.com,<etc>  | IP or hostname for the NTP hosts            |
+| DNS                       | dns1.basedomain.com,etc   | IP or hostname for the DNS hosts            |
+| NTP                       | ntp.basedomain.com,etc    | IP or hostname for the NTP hosts            |
 | Cluster Name              | poc                       | Name of the cluster                         |
 | Base Domain               | ocp.basedomain.com        | Name of the domain                          |
 | Machine Subnet            | 10.1.0.0/24 (vlan - 123)  | Subnet/vlan for all machines/ips in cluster |
@@ -16,7 +16,7 @@
 | API VIP                   | 10.1.0.9                  | VIP for the MetalLB API Endpoint            |
 | Ingress VIP               | 10.1.0.10                 | VIP for the MetalLB Ingress Endpoint        |
 
-https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#CO63-10
+[Pod Subnet - Host Prefix](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#CO63-10)
 
 ## Gather the Machine Information
 
