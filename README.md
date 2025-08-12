@@ -1,5 +1,23 @@
 # ocp-agent-install-config-examples
 
+## Gather the Cluster Install Information
+
+| Variable                  | Example Value             | Description                                 | 
+| ---                       | ---                       | ---                                         |
+| Bastion IP                | 10.1.0.4                  | IP or hostname for the bastion host         |
+| DNS                       | dns1.basedomain.com,<etc> | IP or hostname for the DNS hosts            |
+| NTP                       | ntp.basedomain.com,<etc>  | IP or hostname for the NTP hosts            |
+| Cluster Name              | poc                       | Name of the cluster                         |
+| Base Domain               | ocp.basedomain.com        | Name of the domain                          |
+| Machine Subnet            | 10.1.0.0/24 (vlan - 123)  | Subnet/vlan for all machines/ips in cluster |
+| Pod Subnet                | 10.128.0.0/14             | Subnet for pod SDN                          |
+| Pod Subnet - Host Prefix  | 23                        | Host prefix for Subnet for pod SDN          |
+| Service Subnet            | 172.30.0.0/16             | Subnet for service SDN                      |
+| API VIP                   | 10.1.0.9                  | VIP for the MetalLB API Endpoint            |
+| Ingress VIP               | 10.1.0.10                 | VIP for the MetalLB Ingress Endpoint        |
+
+https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#CO63-10
+
 ## Gather the Machine Information
 
 Typically, machines will have more than one NIC and these will be setup in a bond. Please collect the interface names and MAC addresses for ALL NICS and the install disk location on the machines. You provide the hostnames, IPs. IPs need to be located in the machine configuration subnet used on the install. 
@@ -21,6 +39,18 @@ Typically, machines will have more than one NIC and these will be setup in a bon
 
 cp = Control Plane  
 w  = Worker
+
+## Create DNS Entries
+
+Create the following A records in your DNS based on the values from above. 
+
+| A Record                      | IP Address  | Description                         | 
+| ---                           | ---         | ---                                 |
+| api.poc.ocp.basedomain.com    | 10.1.0.9    | Virtual IP for the API endpoint     |
+| *.apps.poc.ocp.basedomain.com | 10.1.0.10   | Virtual IP for the ingress endpoint |
+
+
+https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#installation-dns-user-infra_installing-bare-metal-network-customizations
 
 ## Create Bastion Host
 
@@ -123,10 +153,12 @@ oc delete pods --all-namespaces --field-selector=status.phase=Failed
 
 ## Documentation
 
+* Minimum resource requirements for cluster installation - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#installation-minimum-resource-requirements_installing-bare-metal-network-customizations 
+* DNS Requirements - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#installation-dns-user-infra_installing-bare-metal-network-customizations
 * Installing on Bare Metal - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index
 * Configuring Firewall - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/installation_configuration/configuring-firewall#configuring-firewall_configuring-firewall
 * Network Connectivity Requirements - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#installation-network-connectivity-user-infra_installing-bare-metal
-* Ensuring required ports are open - https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html-single/installing_on_bare_metal/index#network-requirements-ensuring-required-ports-are-open_ipi-install-prerequisites
+* Ensuring required ports are open - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#network-requirements-ensuring-required-ports-are-open_ipi-install-prerequisites
 
 
 ## Install Debugging
