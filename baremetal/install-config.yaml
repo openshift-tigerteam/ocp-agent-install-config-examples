@@ -27,3 +27,7 @@ platform:
     ingressVIP: 10.1.0.10
 pullSecret: '<hidden>'
 sshKey: '<hidden>'
+#proxy:
+#  httpProxy: http://user:password@proxy.example.com:3128
+#  httpsProxy: http://user:password@proxy.example.com:3128
+#  noProxy: ocp.example.com,10.1.0.0/24,10.128.0.0/14,172.30.0.0/16,api-int.ocp.example.com,*.ocp.example.com

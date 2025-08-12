@@ -1,6 +1,6 @@
 # ocp-agent-install-config-examples
 
-# Create Bastion Host
+## Create Bastion Host
 
 * Download Red Hat Enterprise Linux 9.x Binary DVD from https://access.redhat.com/downloads/content/rhel
 * Boot host from ISO and perform install as Server with GUI
@@ -17,44 +17,53 @@ sudo subscription-manager repos --enable=rhel-9-for-x86_64-appstream-rpms
 sudo dnf update -y
 ```
 
-# Download Tools Commands
+## Download Tools Commands
 
+Install needed tools on bastion
 ```shell
-wget -q -O openshift-client-linux.tar.gz https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz
-tar -xvzf openshift-client-linux.tar.gz 
-wget -q -O openshift-install-linux.tar.gz https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/openshift-install-linux.tar.gz
-tar -xvzf openshift-install-linux.tar.gz 
-
-sudo mv openshift-install /usr/local/bin/
-sudo mv oc /usr/local/bin/
-sudo chmod +x /usr/local/bin/openshift-install /usr/local/bin/oc
-
-sudo dnf install -y nmstate git
+OCP_VERSION=4.19
+wget "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable-${OCP_VERSION}/openshift-install-linux.tar.gz" -P /tmp
+sudo tar -xvzf /tmp/openshift-install-linux.tar.gz -C /usr/local/bin
+wget "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable-${OCP_VERSION}/openshift-client-linux.tar.gz" -P /tmp
+sudo tar -xvzf /tmp/openshift-client-linux.tar.gz -C /usr/local/bin
+rm /tmp/openshift-install-linux.tar.gz /tmp/openshift-client-linux.tar.gz
+sudo sudo dnf install nmstate git
 ```
 
-# Install Commands
+Check the versions of needed tools
+```shell
+openshift-install version
+oc version
+nmstatectl -V
+git -v
+```
 
+## OpenShift Agent Based Install Commands
+
+Create the ISO. For the install-config.yaml and agent-config.yaml, you can use the examples from the folders in this repo.  
 ```shell
 mkdir -p ocp && cd ocp
 vi install-config.yaml 
 vi agent-config.yaml
 rm -rf install
 mkdir install
-cp install-config.yaml agent-config.yaml install
+cp -r install-config.yaml agent-config.yaml install
 openshift-install agent create image --dir=install --log-level=debug
 ```
 
-Copy the ISO to the storage where you can boot from. 
-```
-scp snimmo@192.168.122.187:/home/snimmo/ocp/install/agent.x86_64.iso ~/iso/
+Example Copy the ISO to the storage where you can boot from. 
+```shell
+scp snimmo@192.168.122.187:~/ocp/install/agent.x86_64.iso ~/iso/
 ```
 
-Boot hosts with created ISO
+Boot hosts with created ISO...
 
+Wait for Bootstrap Complete
 ```shell
 openshift-install agent wait-for bootstrap-complete --dir=install --log-level=debug
 ```
 
+Wait for Install Complete
 ```shell
 openshift-install agent wait-for install-complete --dir=install --log-level=debug
 ```
@@ -66,19 +75,4 @@ openshift-install agent wait-for install-complete --dir=install --log-level=debu
 ```shell
 oc delete pods --all-namespaces --field-selector=status.phase=Succeeded
 oc delete pods --all-namespaces --field-selector=status.phase=Failed
-```
-
-## Install ODF
-
-```shell
-git clone https://github.com/openshift-tigerteam/ocp-agent-install-config-examples.git
-oc apply -f ocp-agent-install-config-examples/postinstall/openshift-data-foundation.yaml
-```
-
-### Wiping Disks
-```shell
-ssh -i ~/.ssh/ocp core@10.3.0.11
-sudo fdisk /dev/nvme0n1
-g
-w
 ```
