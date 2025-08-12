@@ -40,16 +40,22 @@ git -v
 
 ## OpenShift Agent Based Install Commands
 
-Create the ISO. For the install-config.yaml and agent-config.yaml, you can use the examples from the folders in this repo.  
+Create the ISO. For the install-config.yaml and agent-config.yaml, you can use the examples from the folders in this repo. 
+
+> There is a reason we copy the config files into an install directory and run it from there. The agent create image process is destructive to the configuration files so it's smart to keep a copy outside the target directory so if we need to regenerate the iso from the configurations, it can be done easily. 
+
 ```shell
 mkdir -p ocp && cd ocp
-vi install-config.yaml 
-vi agent-config.yaml
+vi install-config.yaml  # Add your specific configuration
+vi agent-config.yaml    # Add your specific configuration
+#
 rm -rf install
 mkdir install
 cp -r install-config.yaml agent-config.yaml install
 openshift-install agent create image --dir=install --log-level=debug
 ```
+
+Wait for the agent create image command to complete and you will have a iso file. 
 
 Example Copy the ISO to the storage where you can boot from. 
 ```shell
@@ -70,8 +76,14 @@ openshift-install agent wait-for install-complete --dir=install --log-level=debu
 
 > You don't have to do the bootstrap-complete command at all, you can just run the install-complete...
 
-# Post Install
+## Post Install
 
+Login to the Cluster
+```shell
+oc login --server=https://api.cluster.basedomain.com:6443 -u kubeadmin -p <password>
+```
+
+Cleanup the install pods
 ```shell
 oc delete pods --all-namespaces --field-selector=status.phase=Succeeded
 oc delete pods --all-namespaces --field-selector=status.phase=Failed
