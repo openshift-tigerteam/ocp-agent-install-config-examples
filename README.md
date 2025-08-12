@@ -1,5 +1,15 @@
 # ocp-agent-install-config-examples
 
+## Gather the Machine Information
+
+| Type | Hostname | Interface | MAC Address | IP Address | Disk Hint |
+| cp | cp-1 | eno1 | A0-B1-C2-D3-E4-F5 | 10.1.0.12 | /dev/sda |
+| cp | cp-2 | eno1 | A0-B1-C2-D3-E4-F5 | 10.1.0.13 | /dev/sda |
+| cp | cp-3 | eno1 | A0-B1-C2-D3-E4-F5 | 10.1.0.14 | /dev/sda |
+| w | worker-1 | eno1 | A0-B1-C2-D3-E4-F5 | 10.1.0.15 | /dev/sda |
+| w | worker-2 | eno1 | A0-B1-C2-D3-E4-F5 | 10.1.0.16 | /dev/sda |
+| w | worker-3 | eno1 | A0-B1-C2-D3-E4-F5 | 10.1.0.15 | /dev/sda |
+
 ## Create Bastion Host
 
 * Download Red Hat Enterprise Linux 9.x Binary DVD from https://access.redhat.com/downloads/content/rhel
@@ -9,7 +19,7 @@
 
 > **Everything from here on out is done on the bastion host.**
 
-## Register Bastion RHEL Box
+### Register Bastion RHEL Box
 ```
 sudo subscription-manager register # Enter username/password
 sudo subscription-manager repos --enable=rhel-9-for-x86_64-baseos-rpms
@@ -19,7 +29,7 @@ sudo dnf update -y
 
 ## Download Tools Commands
 
-Install needed tools on bastion
+### Install needed tools on bastion
 ```shell
 OCP_VERSION=4.19
 wget "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable-${OCP_VERSION}/openshift-install-linux.tar.gz" -P /tmp
@@ -30,12 +40,21 @@ rm /tmp/openshift-install-linux.tar.gz /tmp/openshift-client-linux.tar.gz
 sudo sudo dnf install nmstate git
 ```
 
-Check the versions of needed tools
+### Check the versions of needed tools
 ```shell
 openshift-install version
 oc version
 nmstatectl -V
 git -v
+```
+
+### Get the Pull Secret
+Pull Secret is available at https://console.redhat.com/openshift/install/pull-secret
+Download to `~/.pull-secret`
+
+### Create SSH Key
+```shell 
+ssh-keygen -t ed25519 -f ~/.ssh/ocp_ed25519
 ```
 
 ## OpenShift Agent Based Install Commands
@@ -46,7 +65,7 @@ Create the ISO. For the install-config.yaml and agent-config.yaml, you can use t
 
 ```shell
 mkdir -p ocp && cd ocp
-vi install-config.yaml  # Add your specific configuration
+vi install-config.yaml  # Add your specific configuration - Need pull secret and SSH key from above
 vi agent-config.yaml    # Add your specific configuration
 #
 rm -rf install
@@ -88,3 +107,12 @@ Cleanup the install pods
 oc delete pods --all-namespaces --field-selector=status.phase=Succeeded
 oc delete pods --all-namespaces --field-selector=status.phase=Failed
 ```
+
+
+## Documentation
+
+* Installing on Bare Metal - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index
+* Configuring Firewall - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/installation_configuration/configuring-firewall#configuring-firewall_configuring-firewall
+* Network Connectivity Requirements - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#installation-network-connectivity-user-infra_installing-bare-metal
+* Ensuring required ports are open - https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html-single/installing_on_bare_metal/index#network-requirements-ensuring-required-ports-are-open_ipi-install-prerequisites
+* 
