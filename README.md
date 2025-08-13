@@ -1,6 +1,16 @@
 # ocp-agent-install-config-examples
 
+## Prior to Install
+
+Prior to the install, you must open the firewall and ports between the machines. 
+
+* Configuring Firewall - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/installation_configuration/configuring-firewall#configuring-firewall_configuring-firewall
+* Network Connectivity Requirements - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#installation-network-connectivity-user-infra_installing-bare-metal
+* Ensuring required ports are open - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#network-requirements-ensuring-required-ports-are-open_ipi-install-prerequisites
+
 ## Gather the Cluster Install Information
+
+Below are the values an enterprise typically has to gather or create for installing OpenShift. The Pod Subnet and Service Subnet are run in the software defined network (SDN) so if those values conflict with existing subnets AND your pods in the cluster will want to route to those outside services with conflicting IPs, you will need to provide different subnets. 
 
 | Variable                  | Example Value             | Description                                 | 
 | ---                       | ---                       | ---                                         |
@@ -17,6 +27,7 @@
 | Ingress VIP               | 10.1.0.10                 | VIP for the MetalLB Ingress Endpoint        |
 
 [Pod Subnet - Host Prefix](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#CO63-10)
+[CIDR Subnet Reference](https://docs.netgate.com/pfsense/en/latest/network/cidr.html#understanding-cidr-subnet-mask-notation)
 
 ## Gather the Machine Information
 
@@ -24,17 +35,17 @@ Typically, machines will have more than one NIC and these will be setup in a bon
 
 | Type  | Hostname  | Interface | MAC Address       | IP Address    | Disk Hint |
 | ---   | ---       | ---       | ---               | ---           | ---       |
-| cp    | cp-1      | eno1      | A0-B1-C2-D3-E4-E1 | 10.1.0.12     | /dev/sda  |
+| cp    | cp-1      | eno1      | A0-B1-C2-D3-E4-E1 | 10.1.0.11     | /dev/sda  |
 |       |           | eno2      | A0-B1-C2-D3-E4-E2 |               |           |
-| cp    | cp-2      | eno1      | A0-B1-C2-D3-E4-E3 | 10.1.0.13     | /dev/sda  |
+| cp    | cp-2      | eno1      | A0-B1-C2-D3-E4-E3 | 10.1.0.12     | /dev/sda  |
 |       |           | eno2      | A0-B1-C2-D3-E4-E4 |               |           |
-| cp    | cp-3      | eno1      | A0-B1-C2-D3-E4-E5 | 10.1.0.14     | /dev/sda  |
+| cp    | cp-3      | eno1      | A0-B1-C2-D3-E4-E5 | 10.1.0.13     | /dev/sda  |
 |       |           | eno2      | A0-B1-C2-D3-E4-E6 |               |           |
-| w     | worker-1  | eno1      | A0-B1-C2-D3-E4-F1 | 10.1.0.15     | /dev/sda  |
+| w     | worker-1  | eno1      | A0-B1-C2-D3-E4-F1 | 10.1.0.21     | /dev/sda  |
 |       |           | eno2      | A0-B1-C2-D3-E4-F2 |               |           |
-| w     | worker-2  | eno1      | A0-B1-C2-D3-E4-F3 | 10.1.0.16     | /dev/sda  |
+| w     | worker-2  | eno1      | A0-B1-C2-D3-E4-F3 | 10.1.0.22     | /dev/sda  |
 |       |           | eno2      | A0-B1-C2-D3-E4-F4 |               |           |
-| w     | worker-3  | eno1      | A0-B1-C2-D3-E4-F5 | 10.1.0.15     | /dev/sda  |
+| w     | worker-3  | eno1      | A0-B1-C2-D3-E4-F5 | 10.1.0.23     | /dev/sda  |
 |       |           | eno2      | A0-B1-C2-D3-E4-F6 |               |           |
 
 cp = Control Plane  
