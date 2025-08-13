@@ -4,9 +4,9 @@
 
 Prior to the install, you must open the firewall and ports between the machines. 
 
-* Configuring Firewall - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/installation_configuration/configuring-firewall#configuring-firewall_configuring-firewall
-* Network Connectivity Requirements - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#installation-network-connectivity-user-infra_installing-bare-metal
-* Ensuring required ports are open - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#network-requirements-ensuring-required-ports-are-open_ipi-install-prerequisites
+* [Configuring Firewall](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/installation_configuration/configuring-firewall#configuring-firewall_configuring-firewall)
+* [Network Connectivity Requirements](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#installation-network-connectivity-user-infra_installing-bare-metal)
+* [Ensuring required ports are open](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#network-requirements-ensuring-required-ports-are-open_ipi-install-prerequisites)
 
 ## Gather the Cluster Install Information
 
@@ -26,7 +26,7 @@ Below are the values an enterprise typically has to gather or create for install
 | API VIP                   | 10.1.0.9                  | VIP for the MetalLB API Endpoint            |
 | Ingress VIP               | 10.1.0.10                 | VIP for the MetalLB Ingress Endpoint        |
 
-[Pod Subnet - Host Prefix](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#CO63-10)
+[Pod Subnet - Host Prefix](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#CO63-10)  
 [CIDR Subnet Reference](https://docs.netgate.com/pfsense/en/latest/network/cidr.html#understanding-cidr-subnet-mask-notation)
 
 ## Gather the Machine Information
