@@ -4,9 +4,9 @@
 
 Prior to the install, you must open the firewall and ports between the machines. 
 
-* <a href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/installation_configuration/configuring-firewall#configuring-firewall_configuring-firewall" target="_blank">Configuring Firewall</a>
-* <a href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#installation-network-connectivity-user-infra_installing-bare-metal" target="_blank">Network Connectivity Requirements</a>
-* <a href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#network-requirements-ensuring-required-ports-are-open_ipi-install-prerequisites" target="_blank">Ensuring required ports are open</a>
+* [Configuring Firewall](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/installation_configuration/configuring-firewall#configuring-firewall_configuring-firewall)
+* [Network Connectivity Requirements](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#installation-network-connectivity-user-infra_installing-bare-metal)
+* [Ensuring required ports are open](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#network-requirements-ensuring-required-ports-are-open_ipi-install-prerequisites)
 
 ## Gather the Cluster Install Information
 
