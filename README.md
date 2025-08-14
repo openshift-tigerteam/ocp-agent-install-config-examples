@@ -161,6 +161,22 @@ oc delete pods --all-namespaces --field-selector=status.phase=Succeeded
 oc delete pods --all-namespaces --field-selector=status.phase=Failed
 ```
 
+### Install the Following Operators
+* Kubernetes NMState Operator 
+* Node Feature Discovery
+* Node Health Check Operator
+* Self Node Remediation Operator
+* Kube Descheduler Operator
+
+### Install Storage
+
+### Install Additional Operators
+* OpenShift Virtualization
+* cert-manager Operator for Red Hat OpenShift
+* Logging [link](https://docs.redhat.com/en/documentation/red_hat_openshift_logging/6.3/html/installing_logging/installing-logging#installing-loki-and-logging-gui_installing-logging)
+  * Loki Operator
+  * Red Hat OpenShift Logging
+
 
 ## Documentation
 
