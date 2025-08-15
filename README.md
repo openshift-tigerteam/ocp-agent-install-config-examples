@@ -41,15 +41,12 @@ Typically, machines will have more than one NIC and these will be setup in a bon
 |                           | eno2      | A0-B1-C2-D3-E4-E4 |               |           |
 | openshift-control-plane-2 | eno1      | A0-B1-C2-D3-E4-E5 | 10.1.0.13     | /dev/sda  |
 |                           | eno2      | A0-B1-C2-D3-E4-E6 |               |           |
-| Worker-0                  | eno1      | A0-B1-C2-D3-E4-F1 | 10.1.0.21     | /dev/sda  |
+| openshift-worker-0        | eno1      | A0-B1-C2-D3-E4-F1 | 10.1.0.21     | /dev/sda  |
 |                           | eno2      | A0-B1-C2-D3-E4-F2 |               |           |
-| worker-1                  | eno1      | A0-B1-C2-D3-E4-F3 | 10.1.0.22     | /dev/sda  |
+| openshift-worker-1        | eno1      | A0-B1-C2-D3-E4-F3 | 10.1.0.22     | /dev/sda  |
 |                           | eno2      | A0-B1-C2-D3-E4-F4 |               |           |
-| worker-2                  | eno1      | A0-B1-C2-D3-E4-F5 | 10.1.0.23     | /dev/sda  |
+| openshift-worker-2        | eno1      | A0-B1-C2-D3-E4-F5 | 10.1.0.23     | /dev/sda  |
 |                           | eno2      | A0-B1-C2-D3-E4-F6 |               |           |
-
-> cp = Control Plane  
-> w  = Worker
 
 ## Create DNS Entries
 
