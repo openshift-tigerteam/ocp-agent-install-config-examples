@@ -169,13 +169,17 @@ oc delete pods --all-namespaces --field-selector=status.phase=Failed
 * Kube Descheduler Operator
 
 ### Install Storage
+Install the storage of your choice....
 
-### Install Additional Operators
+### Install Additional Operators (after storage)
 * OpenShift Virtualization
+* [Configure Registry](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/registry/index)
 * cert-manager Operator for Red Hat OpenShift
 * Logging [link](https://docs.redhat.com/en/documentation/red_hat_openshift_logging/6.3/html/installing_logging/installing-logging#installing-loki-and-logging-gui_installing-logging)
   * Loki Operator
   * Red Hat OpenShift Logging
+
+[Post Install Configuration](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/postinstallation_configuration/index)
 
 
 ## Documentation
