@@ -168,7 +168,11 @@ oc delete pods --all-namespaces --field-selector=status.phase=Failed
 * Node Feature Discovery
 * Node Health Check Operator
 * Self Node Remediation Operator
+* Fence Agents Remediation Operator
 * Kube Descheduler Operator
+
+### Setup NNCPs and UDNs
+Create the networks needed...
 
 ### Install Storage
 Install the storage of your choice....
