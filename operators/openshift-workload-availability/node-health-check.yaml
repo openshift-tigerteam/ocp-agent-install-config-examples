@@ -17,9 +17,9 @@ spec:
       - key: node-role.kubernetes.io/worker
         operator: Exists
   unhealthyConditions:
-    - duration: 300s
+    - duration: 60s
       type: Ready
       status: 'False'
-    - duration: 300s
+    - duration: 60s
       type: Ready
       status: Unknown

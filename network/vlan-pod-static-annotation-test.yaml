@@ -70,4 +70,3 @@ spec:
       command: ["sleep", "infinity"]
       securityContext:
         runAsUser: 0
-

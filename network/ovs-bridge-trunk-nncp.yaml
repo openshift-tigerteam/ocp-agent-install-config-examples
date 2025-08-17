@@ -1,0 +1,67 @@
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: ovs-bridge-trunk-nncp
+spec:
+  nodeSelector:
+    node-role.kubernetes.io/worker: ""
+  desiredState:
+    interfaces:
+      - name: ovs-bridge-trunk
+        type: ovs-bridge
+        state: up
+        bridge:
+          port:
+            - name: bond0 
+    ovn:
+      bridge-mappings:
+        - localnet: localnet-bridge-trunk
+          bridge: ovs-bridge-trunk
+          state: present
+---
+apiVersion: k8s.ovn.org/v1
+kind: ClusterUserDefinedNetwork
+metadata:
+ name: localnet-bridge-trunk-vlan4
+spec:
+  namespaceSelector:
+    matchExpressions:
+      - key: kubernetes.io/metadata.name
+        operator: In
+        values: ["vlan4-test","vms","default"] 
+  network:
+    topology: Localnet
+    localnet:
+      role: Secondary
+      physicalNetworkName: localnet-bridge-trunk
+      vlan:
+        mode: Access
+        access:
+          id: 4
+      subnets:
+        - "10.4.0.0/24"
+      excludeSubnets:
+        - "10.4.0.0/29"       # excludes 10.4.0.0 – 10.4.0.7
+        - "10.4.0.248/29"     # excludes 10.4.0.248 – 10.4.0.255
+      ipam:
+        lifecycle: Persistent
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vlan4-annotation-debug-ocp2
+  namespace: vlan4-test
+  annotations:
+    k8s.v1.cni.cncf.io/networks: |
+      [
+        { "name": "localnet-bridge-trunk-vlan4" }
+      ]
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: ocp2
+  containers:
+    - name: tools
+      image: quay.io/openshift/origin-tools:4.19
+      command: ["sleep", "infinity"]
+      securityContext:
+        runAsUser: 0
