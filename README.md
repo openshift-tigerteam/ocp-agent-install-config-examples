@@ -64,8 +64,8 @@ dig +noall +answer @<nameserver_ip> api.<cluster_name>.<base_domain>
 dig +noall +answer @<nameserver_ip> test.apps.<cluster_name>.<base_domain>
 ```
 
-[DNS requirements](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#network-requirements-dns_ipi-install-prerequisites)  
-[Validating DNS resolution for user-provisioned infrastructure](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#installation-user-provisioned-validating-dns_installing-bare-metal-network-customizations)
+> [DNS requirements](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#network-requirements-dns_ipi-install-prerequisites)  
+> [Validating DNS resolution for user-provisioned infrastructure](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#installation-user-provisioned-validating-dns_installing-bare-metal-network-customizations)
 
 ## Create Bastion Host
 
