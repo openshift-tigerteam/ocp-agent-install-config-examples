@@ -1,16 +1,20 @@
 apiVersion: nmstate.io/v1
 kind: NodeNetworkConfigurationPolicy
 metadata:
-  name: bond0-vlan30
+  name: bond0-vlan32
 spec:
   desiredState:
     interfaces:
-      - name: bond0.30
+      - name: bond0.32
         type: vlan
         state: up
         vlan:
           base-iface: bond0
-          id: 30
+          id: 32
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
 ---
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
@@ -23,11 +27,12 @@ spec:
       "cniVersion": "0.3.1",
       "name": "live-migration-bridge",
       "type": "macvlan",
-      "master": "bond0.30",
+      "master": "bond0.32",
       "mode": "bridge",
       "ipam": {
         "type": "whereabouts",
-        "range": "10.30.0.0/24"
+        "range": "10.32.0.0/24",
+        "exclude": [ "10.32.0.0/29" ]
       }
     }
 
