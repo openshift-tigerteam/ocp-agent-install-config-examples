@@ -180,7 +180,7 @@ Install the storage of your choice....
 * Fence Agents Remediation Operator
 * Kube Descheduler Operator
 * [Configure Registry](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/registry/index)
-* cert-manager Operator for Red Hat OpenShift
+* [cert-manager Operator for Red Hat OpenShift](https://stephennimmo.com/2024/05/15/generating-lets-encrypt-certificates-with-red-hat-openshift-cert-manager-operator-using-the-cloudflare-dns-solver)
 * [Logging](https://docs.redhat.com/en/documentation/red_hat_openshift_logging/6.3/html/installing_logging/installing-logging#installing-loki-and-logging-gui_installing-logging)
   * Loki Operator
   * Red Hat OpenShift Logging
