@@ -1,3 +1,13 @@
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  name: vms
+---
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  name: vlan4-test
+---
 apiVersion: nmstate.io/v1
 kind: NodeNetworkConfigurationPolicy
 metadata:
@@ -22,7 +32,7 @@ spec:
 apiVersion: k8s.ovn.org/v1
 kind: ClusterUserDefinedNetwork
 metadata:
- name: localnet-bridge-trunk-vlan4
+ name: vlan4-cudn
 spec:
   namespaceSelector:
     matchExpressions:
@@ -54,7 +64,7 @@ metadata:
   annotations:
     k8s.v1.cni.cncf.io/networks: |
       [
-        { "name": "localnet-bridge-trunk-vlan4" }
+        { "name": "vlan4-cudn" }
       ]
 spec:
   nodeSelector:

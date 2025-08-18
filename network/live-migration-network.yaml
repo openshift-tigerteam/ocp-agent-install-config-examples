@@ -33,4 +33,4 @@ spec:
 
 
 # oc edit hyperconverged kubevirt-hyperconverged -n openshift-cnv
-# spec:liveMigrationConfig:network: live-migration-bridge
+# spec:liveMigrationConfig:network: live-migration-nad

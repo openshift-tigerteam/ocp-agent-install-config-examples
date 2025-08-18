@@ -165,11 +165,6 @@ oc delete pods --all-namespaces --field-selector=status.phase=Failed
 
 ### Install the Following Operators
 * Kubernetes NMState Operator 
-* Node Feature Discovery
-* Node Health Check Operator
-* Self Node Remediation Operator
-* Fence Agents Remediation Operator
-* Kube Descheduler Operator
 
 ### Setup NNCPs and UDNs
 Create the networks needed...
@@ -179,6 +174,11 @@ Install the storage of your choice....
 
 ### Install Additional Operators (after storage)
 * OpenShift Virtualization
+* Node Feature Discovery
+* Node Health Check Operator
+* Self Node Remediation Operator
+* Fence Agents Remediation Operator
+* Kube Descheduler Operator
 * [Configure Registry](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/registry/index)
 * cert-manager Operator for Red Hat OpenShift
 * [Logging](https://docs.redhat.com/en/documentation/red_hat_openshift_logging/6.3/html/installing_logging/installing-logging#installing-loki-and-logging-gui_installing-logging)
