@@ -93,8 +93,8 @@ wget "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable-${
 sudo tar -xvzf /tmp/openshift-install-linux.tar.gz -C /usr/local/bin
 wget "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable-${OCP_VERSION}/openshift-client-linux.tar.gz" -P /tmp
 sudo tar -xvzf /tmp/openshift-client-linux.tar.gz -C /usr/local/bin
-rm /tmp/openshift-install-linux.tar.gz /tmp/openshift-client-linux.tar.gz
-sudo sudo dnf install nmstate git
+rm /tmp/openshift-install-linux.tar.gz /tmp/openshift-client-linux.tar.gz -y
+sudo dnf install nmstate git
 ```
 
 ### Check the versions of needed tools
@@ -133,6 +133,8 @@ mkdir install
 cp -r install-config.yaml agent-config.yaml install
 openshift-install agent create image --dir=install --log-level=debug
 ```
+
+> There is a shell script in this directory called `create-image.sh` that contains this contents. 
 
 Wait for the agent create image command to complete and you will have a iso file located at `~/ocp/install/agent.x86_64.iso`.
 

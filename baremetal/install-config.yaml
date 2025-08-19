@@ -26,7 +26,7 @@ platform:
     apiVIP: 10.1.0.9
     ingressVIP: 10.1.0.10
 pullSecret: '<hidden>'
-sshKey: '<hidden>'
+sshKey: '<hidden> THIS IS THE PUBLIC KEY'
 #proxy:
 #  httpProxy: http://user:password@proxy.example.com:3128
 #  httpsProxy: http://user:password@proxy.example.com:3128
