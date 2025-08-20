@@ -169,6 +169,7 @@ Boot hosts with created ISO...
 
 When all the hosts are booted, wait for the install to complete (~15-30 minutes)
 ```shell
+openshift-install agent wait-for bootstrap-complete --dir=install --log-level=debug
 openshift-install agent wait-for install-complete --dir=install --log-level=debug
 ```
 
