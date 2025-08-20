@@ -1,6 +1,6 @@
 # Rotate SSH Keys after OpenShift Install
 
-[Back to Main](../README.md)
+[Back to Main](README.md)
 
 Below is the procedure to rotate the SSH keys. 
 
