@@ -137,13 +137,14 @@ platform:
       - <ntp_domain_or_ip>
 ```
 
-In the `agent-config.yaml`, add the spec for the NTP servers in the root fo the document.
+In the `agent-config.yaml`, add the spec for the NTP servers in the root for the document.
 ```
 additionalNTPSources: 
   - <ntp_domain_or_ip>
 ```
 
 > Notice the differences in the name - Servers v Sources...
+> [NTP Sync Docs](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/installing_on_bare_metal/installer-provisioned-infrastructure#checking-ntp-sync_ipi-install-installation-workflow)
 
 ### Creating the Image
 
