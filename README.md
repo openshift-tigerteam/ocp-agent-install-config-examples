@@ -126,11 +126,13 @@ vi install-config.yaml  # Add your specific configuration - Need pull secret and
 vi agent-config.yaml    # Add your specific configuration
 ```
 
+> If you have additional manifests to apply at install time, place them in a folder named `openshift` at the same level as the `install-config.yaml` and `agent-config.yaml`. For example, chrony configuration. See chrony.md. 
+
 From the `~/ocp` directory, you can now create the agent iso. We create an `install` directory and copy the yaml files into the directory because the image creation process consumes and destroys the configuration files. We want to keep a copy in case the process needs to be repeated. 
 ```shell
 rm -rf install
 mkdir install
-cp -r install-config.yaml agent-config.yaml install
+cp -r install-config.yaml agent-config.yaml openshift install
 openshift-install agent create image --dir=install --log-level=debug
 ```
 
