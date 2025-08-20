@@ -116,17 +116,16 @@ ssh-keygen -t ed25519 -f ~/.ssh/ocp_ed25519
 
 ## OpenShift Agent Based Install Commands
 
-Create the ISO. For the install-config.yaml and agent-config.yaml, you can use the examples from the folders in this repo. 
-
-> There is a reason we copy the config files into an install directory and run it from there. The agent create image process is destructive to the configuration files so it's smart to keep a copy outside the target directory so if we need to regenerate the iso from the configurations, it can be done easily. 
+Create the configs for generating the ISOFor the install-config.yaml and agent-config.yaml, you can use the examples from the folders in this repo. 
 
 ```shell
 mkdir -p ocp && cd ocp
+mkdir -p cluster-manifests
 vi install-config.yaml  # Add your specific configuration - Need pull secret and SSH key from above
 vi agent-config.yaml    # Add your specific configuration
 ```
 
-> If you have additional manifests to apply at install time, place them in a folder named `cluster-manifests` at the same level as the `install-config.yaml` and `agent-config.yaml`. For example, chrony configuration. See chrony.md. 
+> If you have additional manifests to apply at install time, place them in a folder named `cluster-manifests` at the same level as the `install-config.yaml` and `agent-config.yaml`. 
 
 ### NTP Setup 
 
@@ -141,8 +140,10 @@ platform:
 In the `agent-config.yaml`, add the spec for the NTP servers in the root fo the document.
 ```
 additionalNTPSources: 
-  - 10.160.128.20
+  - <ntp_domain_or_ip>
 ```
+
+> Notice the differences in the name - Servers v Sources...
 
 ### Creating the Image
 
@@ -150,7 +151,7 @@ From the `~/ocp` directory, you can now create the agent iso. We create an `inst
 ```shell
 rm -rf install
 mkdir install
-cp -r install-config.yaml agent-config.yaml openshift install
+cp -r install-config.yaml agent-config.yaml cluster-manifests install
 openshift-install agent create image --dir=install --log-level=debug
 ```
 
