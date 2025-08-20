@@ -191,6 +191,8 @@ Install the storage of your choice....
 
 [Post Install Configuration](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/postinstallation_configuration/index)
 
+[Rotate SSH Keys after install](rotate-ssh-keys.md)
+
 ## Documentation
 
 * Minimum resource requirements for cluster installation - https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/installing_on_bare_metal/index#installation-minimum-resource-requirements_installing-bare-metal-network-customizations 
