@@ -25,6 +25,8 @@ platform:
   baremetal:
     apiVIP: 10.1.0.9
     ingressVIP: 10.1.0.10
+    #additionalNTPServers: 
+      #- <ntp_domain_or_ip>
 pullSecret: '<hidden>'
 sshKey: '<hidden> THIS IS THE PUBLIC KEY'
 #proxy:

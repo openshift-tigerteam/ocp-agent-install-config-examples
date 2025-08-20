@@ -126,7 +126,25 @@ vi install-config.yaml  # Add your specific configuration - Need pull secret and
 vi agent-config.yaml    # Add your specific configuration
 ```
 
-> If you have additional manifests to apply at install time, place them in a folder named `openshift` at the same level as the `install-config.yaml` and `agent-config.yaml`. For example, chrony configuration. See chrony.md. 
+> If you have additional manifests to apply at install time, place them in a folder named `cluster-manifests` at the same level as the `install-config.yaml` and `agent-config.yaml`. For example, chrony configuration. See chrony.md. 
+
+### NTP Setup 
+
+In the `install-config.yaml`, add the spec for the NTP servers in the baremetal config section. 
+```
+platform:
+  baremetal:
+    additionalNTPServers: 
+      - <ntp_domain_or_ip>
+```
+
+In the `agent-config.yaml`, add the spec for the NTP servers in the root fo the document.
+```
+additionalNTPSources: 
+  - 10.160.128.20
+```
+
+### Creating the Image
 
 From the `~/ocp` directory, you can now create the agent iso. We create an `install` directory and copy the yaml files into the directory because the image creation process consumes and destroys the configuration files. We want to keep a copy in case the process needs to be repeated. 
 ```shell
