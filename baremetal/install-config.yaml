@@ -26,7 +26,8 @@ platform:
     apiVIP: 10.1.0.9
     ingressVIP: 10.1.0.10
     #additionalNTPServers: 
-      #- <ntp_domain_or_ip>
+      #- 0.us.pool.ntp.org
+      #- 1.us.pool.ntp.org
 pullSecret: '<hidden>'
 sshKey: '<hidden> THIS IS THE PUBLIC KEY'
 #proxy:

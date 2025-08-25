@@ -68,7 +68,30 @@ spec:
       subnets:
         - "10.4.0.0/24"
       excludeSubnets:
-        - "10.4.0.0/29"       # excludes 10.4.0.0 – 10.4.0.7
-        - "10.4.0.248/29"     # excludes 10.4.0.248 – 10.4.0.255
+        - "10.4.0.0/31"       # excludes 10.4.0.0 – 10.4.0.1
+        - "10.4.0.255/32"     # excludes 10.4.0.255
       ipam:
+        mode: Enabled         # DEFAULT!
         lifecycle: Persistent
+---
+apiVersion: k8s.ovn.org/v1
+kind: ClusterUserDefinedNetwork
+metadata:
+ name: vlan37-cudn
+spec:
+  namespaceSelector:
+    matchExpressions:
+      - key: kubernetes.io/metadata.name
+        operator: In
+        values: ["default", "project1", "project2"] 
+  network:
+    topology: Localnet
+    localnet:
+      role: Secondary
+      physicalNetworkName: localnet-bridge-trunk
+      vlan:
+        mode: Access
+        access:
+          id: 37
+      ipam:
+        mode: Disabled
