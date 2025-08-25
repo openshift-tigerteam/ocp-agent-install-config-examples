@@ -3,6 +3,8 @@ kind: NodeNetworkConfigurationPolicy
 metadata:
   name: eno1-eno2-bond0-vlan4
 spec:
+  nodeSelector:
+    node-role.kubernetes.io/worker: ""
   desiredState:
     interfaces:
       - name: eno1
@@ -40,6 +42,9 @@ spec:
         bridge:
           port:
             - name: bond1
+          allow-extra-patch-ports: true
+          options:
+            stp: false
     ovn:
       bridge-mappings:
         - localnet: localnet-bridge-trunk
