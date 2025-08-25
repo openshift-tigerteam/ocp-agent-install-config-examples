@@ -4,7 +4,7 @@ metadata:
   name: eno1-eno2-bond0-vlan4
 spec:
   nodeSelector:
-    node-role.kubernetes.io/worker: ""
+    kubernetes.io/hostname: ocp2
   desiredState:
     interfaces:
       - name: eno1
