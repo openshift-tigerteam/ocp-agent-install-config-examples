@@ -1,0 +1,30 @@
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: bond-vlan 
+spec:
+  nodeSelector: 
+    kubernetes.io/hostname: <node01> 
+  desiredState:
+    interfaces:
+    - name: bond10 
+      description: Bonding eth2 and eth3 
+      type: bond 
+      state: up 
+      link-aggregation:
+        mode: balance-xor 
+        options:
+          miimon: '140' 
+        port: 
+        - eth2
+        - eth3
+    - name: bond10.103 
+      description: vlan using bond10 
+      type: vlan 
+      state: up 
+      vlan:
+         base-iface: bond10 
+         id: 103 
+      ipv4:
+        dhcp: true 
+        enabled: true 
