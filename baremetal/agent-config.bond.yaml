@@ -1,0 +1,67 @@
+apiVersion: v1alpha1
+kind: AgentConfig
+metadata:
+  name: cluster1
+rendezvousIP: 10.1.0.11 # IP of the control-plane1 host
+additionalNtpSources:
+  - 0.us.pool.ntp.org
+  - 1.us.pool.ntp.org
+hosts:
+  - hostname: control-plane-1 
+    role: master # master or worker
+    rootDeviceHints:
+      deviceName: "/dev/sda"
+    interfaces:
+      - name: eno1
+        macAddress: A1:B2:3C:4D:1E:11
+      - name: eno2
+        macAddress: A1:B2:3C:4D:2E:11
+    networkConfig:
+      interfaces:
+        - name: eno1
+          type: ethernet
+          state: up
+          mac-address: A1:B2:3C:4D:1E:11
+          ipv4:
+            enabled: false
+          ipv6:
+            enabled: false
+        - name: eno2
+          type: ethernet
+          state: up
+          mac-address: A1:B2:3C:4D:2E:11
+          ipv4:
+            enabled: false
+          ipv6:
+            enabled: false
+        - name: bond0
+          type: bond
+          state: up
+          ipv4:
+            enabled: true
+            address:
+              - ip: 10.1.0.11
+                prefix-length: 24
+            dhcp: false
+          link-aggregation:
+            mode: active-backup
+            port:
+              - eno1
+              - eno2
+            options:
+              miimon: '100'
+              primary: eno1
+          ipv6:
+            enabled: false
+      dns-resolver:
+        config:
+          server:
+            - 10.1.0.2
+      routes:
+        config:
+          - destination: 0.0.0.0/0
+            next-hop-address: 10.1.0.1
+            next-hop-interface: bond0
+            table-id: 254
+
+# Repeat for 2 more control plane nodes and 3 more worker nodes

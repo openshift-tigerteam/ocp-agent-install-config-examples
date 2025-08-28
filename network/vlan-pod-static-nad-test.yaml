@@ -16,6 +16,10 @@ spec:
         vlan:
           base-iface: bond0
           id: 4
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
 ---
 apiVersion: k8s.cni.cncf.io/v1
 kind: NetworkAttachmentDefinition

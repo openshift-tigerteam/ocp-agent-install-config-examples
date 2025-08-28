@@ -18,6 +18,10 @@ spec:
         port: 
         - eth2
         - eth3
+      ipv4:
+        enabled: false
+      ipv6:
+        enabled: false
     - name: bond10.103 
       description: vlan using bond10 
       type: vlan 
@@ -26,5 +30,6 @@ spec:
          base-iface: bond10 
          id: 103 
       ipv4:
-        dhcp: true 
-        enabled: true 
+        enabled: false
+      ipv6:
+        enabled: false

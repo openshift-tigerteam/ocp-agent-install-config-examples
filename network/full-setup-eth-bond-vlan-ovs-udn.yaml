@@ -12,20 +12,16 @@ spec:
         state: up
         mac-address: 7c:c2:c6:45:ae:85
         ipv4:
-          dhcp: false
           enabled: false
         ipv6:
-          dhcp: false
           enabled: false
       - name: eno2
         type: ethernet
         state: up
         mac-address: 1c:69:7a:61:d6:9d
         ipv4:
-          dhcp: false
           enabled: false
         ipv6:
-          dhcp: false
           enabled: false
       - name: bond1
         type: bond
@@ -39,10 +35,8 @@ spec:
             miimon: '100'
             primary: eno1
         ipv4:
-          dhcp: false
           enabled: false
         ipv6:
-          dhcp: false
           enabled: false
 ---
 apiVersion: nmstate.io/v1
@@ -62,7 +56,7 @@ spec:
             - name: bond1
           allow-extra-patch-ports: true
           options:
-            stp: false
+            stp: false # DO NOT ENABLE STP unless you know what you are doing!
     ovn:
       bridge-mappings:
         - localnet: localnet-bridge-trunk

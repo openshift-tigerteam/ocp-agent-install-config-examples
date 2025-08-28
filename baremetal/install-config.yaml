@@ -25,11 +25,12 @@ platform:
   baremetal:
     apiVIP: 10.1.0.9
     ingressVIP: 10.1.0.10
-    #additionalNTPServers: 
-      #- 0.us.pool.ntp.org
-      #- 1.us.pool.ntp.org
+    additionalNTPServers: 
+      - 0.us.pool.ntp.org
+      - 1.us.pool.ntp.org
 pullSecret: '<hidden>'
 sshKey: '<hidden> THIS IS THE PUBLIC KEY'
+# If your environment requires a proxy to access the internet, uncomment and modify
 #proxy:
 #  httpProxy: http://user:password@proxy.example.com:3128
 #  httpsProxy: http://user:password@proxy.example.com:3128

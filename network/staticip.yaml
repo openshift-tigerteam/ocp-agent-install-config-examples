@@ -12,10 +12,8 @@ spec:
         state: up
         mac-address: <macaddress>
         ipv4:
-          dhcp: false
           enabled: false
         ipv6:
-          dhcp: false
           enabled: false
       - name: vlan48
         type: vlan
