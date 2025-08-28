@@ -1,0 +1,33 @@
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: staticip-48-44
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: <hostname>
+  desiredState:
+    interfaces:
+      - name: <devicename>
+        type: ethernet
+        state: up
+        mac-address: <macaddress>
+        ipv4:
+          dhcp: false
+          enabled: false
+        ipv6:
+          dhcp: false
+          enabled: false
+      - name: vlan48
+        type: vlan
+        state: up
+        vlan:
+          base-iface: <devicename>
+          id: 48
+        ipv4:
+          enabled: true
+          address:
+            - ip: <ipaddress>
+              prefix-length: 24
+          dhcp: false
+        ipv6:
+          enabled: false

@@ -257,3 +257,27 @@ This is often the most reliable way to get a shell or verbose output when direct
   * Press the e key to edit the boot parameters.
   * Locate the linux or linuxefi line: This line contains the kernel arguments.
   * Add debug/shell parameters to force an emergency shell. Go to the end of the linux or linuxefi line and add `rd.break` or `rd.break=pre-mount`. This will drop you into an initramfs shell before the root filesystem is mounted. It's a very minimal environment but allows ip a show, dmesg, and looking at files in the initramfs.
+  
+The two main alternatives are:
+
+systemd.unit=emergency.target
+
+    How it works: This parameter tells the systemd process to boot directly into a minimal shell. It will try to mount the root filesystem as read-only and start only the most essential services required for an emergency shell. This is often the preferred method for general system troubleshooting.
+
+    When to use it: This is a good choice for fixing issues that aren't related to the initial filesystem or the boot process itself, such as a corrupt /etc/fstab or a misconfigured service. It gives you a more complete environment than rd.break but still keeps things simple.
+
+init=/bin/bash
+
+    How it works: This is the most direct and basic method. It tells the kernel to bypass all the normal boot processes and execute /bin/bash directly as the first process (PID 1). This gives you a shell with no services, no network, and the root filesystem mounted as read-only.
+
+    When to use it: Use this as a last resort when other methods fail. It's the most primitive and powerful method, as it gives you control before any other processes or services start. It's ideal for a corrupted boot process or severe filesystem issues where rd.break or emergency.target might fail to load. It also requires you to manually remount the root filesystem as read-write, just like you were doing with rd.break.
+
+To use either of these, follow the same initial steps as with rd.break:
+
+    At the GRUB boot menu, press the 'e' key to edit the boot command line.
+
+Navigate to the line that starts with linux.
+
+Append systemd.unit=emergency.target or init=/bin/bash to the end of the line.
+
+Press Ctrl+X or F10 to boot with the modified parameters.
