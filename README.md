@@ -94,7 +94,7 @@ sudo tar -xvzf /tmp/openshift-install-linux.tar.gz -C /usr/local/bin
 wget "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable-${OCP_VERSION}/openshift-client-linux.tar.gz" -P /tmp
 sudo tar -xvzf /tmp/openshift-client-linux.tar.gz -C /usr/local/bin
 rm /tmp/openshift-install-linux.tar.gz /tmp/openshift-client-linux.tar.gz -y
-sudo dnf install nmstate git
+sudo dnf install nmstate git podman
 ```
 
 ### Check the versions of needed tools
@@ -112,6 +112,17 @@ Download to `~/.pull-secret`
 ### Create SSH Key
 ```shell 
 ssh-keygen -t ed25519 -f ~/.ssh/ocp_ed25519
+```
+
+### Check Connectivity
+
+Here are some tools to check connectivity. 
+```shell
+ping registry.redhat.io        # ICMP doesn’t always work, but try
+curl -vk https://registry.redhat.io/v2/
+dig registry.redhat.io +short
+nslookup registry.redhat.io
+podman login registry.redhat.io
 ```
 
 ## OpenShift Agent Based Install Commands
@@ -182,6 +193,12 @@ Login to the Cluster
 oc login --server=https://api.cluster.basedomain.com:6443 -u kubeadmin -p <password>
 ```
 
+Test Connectivity
+```shell
+oc debug node/<worker-node-name> -- chroot /host \
+  podman pull registry.redhat.io/ubi9/ubi:latest
+```
+
 Cleanup the leftover install and configuration pods
 ```shell
 oc delete pods --all-namespaces --field-selector=status.phase=Succeeded
@@ -192,7 +209,7 @@ oc delete pods --all-namespaces --field-selector=status.phase=Failed
 * Kubernetes NMState Operator 
 
 ### Setup NNCPs and UDNs
-Create the networks needed...
+Create the networks needed... [folder](./network)
 
 ### Install Storage
 Install the storage of your choice....
