@@ -139,7 +139,7 @@ vi agent-config.yaml    # Add your specific configuration
 [Example install-config.yaml](./baremetal/install-config.yaml)   
 [Example agent-config.yaml](./baremetal/agent-config.bond.yaml)    
 
-> If you have additional manifests to apply at install time, place them in a folder named `cluster-manifests` at the same level as the `install-config.yaml` and `agent-config.yaml`. staticip-48-44
+> If you have additional manifests to apply at install time, place them in a folder named `cluster-manifests` at the same level as the `install-config.yaml` and `agent-config.yaml`.
 
 ### NTP Setup 
 
@@ -265,15 +265,15 @@ The two main alternatives are:
 
 systemd.unit=emergency.target
 
-    How it works: This parameter tells the systemd process to boot directly into a minimal shell. It will try to mount the root filesystem as read-only and start only the most essential services required for an emergency shell. This is often the preferred method for general system troubleshooting.
+How it works: This parameter tells the systemd process to boot directly into a minimal shell. It will try to mount the root filesystem as read-only and start only the most essential services required for an emergency shell. This is often the preferred method for general system troubleshooting.
 
-    When to use it: This is a good choice for fixing issues that aren't related to the initial filesystem or the boot process itself, such as a corrupt /etc/fstab or a misconfigured service. It gives you a more complete environment than rd.break but still keeps things simple.
+When to use it: This is a good choice for fixing issues that aren't related to the initial filesystem or the boot process itself, such as a corrupt /etc/fstab or a misconfigured service. It gives you a more complete environment than rd.break but still keeps things simple.
 
 init=/bin/bash
 
-    How it works: This is the most direct and basic method. It tells the kernel to bypass all the normal boot processes and execute /bin/bash directly as the first process (PID 1). This gives you a shell with no services, no network, and the root filesystem mounted as read-only.
+How it works: This is the most direct and basic method. It tells the kernel to bypass all the normal boot processes and execute /bin/bash directly as the first process (PID 1). This gives you a shell with no services, no network, and the root filesystem mounted as read-only.
 
-    When to use it: Use this as a last resort when other methods fail. It's the most primitive and powerful method, as it gives you control before any other processes or services start. It's ideal for a corrupted boot process or severe filesystem issues where rd.break or emergency.target might fail to load. It also requires you to manually remount the root filesystem as read-write, just like you were doing with rd.break.
+When to use it: Use this as a last resort when other methods fail. It's the most primitive and powerful method, as it gives you control before any other processes or services start. It's ideal for a corrupted boot process or severe filesystem issues where rd.break or emergency.target might fail to load. It also requires you to manually remount the root filesystem as read-write, just like you were doing with rd.break.
 
 To use either of these, follow the same initial steps as with rd.break:
 
