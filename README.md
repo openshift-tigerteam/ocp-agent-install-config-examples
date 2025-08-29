@@ -261,7 +261,9 @@ This is often the most reliable way to get a shell or verbose output when direct
   * Locate the linux or linuxefi line: This line contains the kernel arguments.
   * Add debug/shell parameters to force an emergency shell. Go to the end of the linux or linuxefi line and add `rd.break` or `rd.break=pre-mount`. This will drop you into an initramfs shell before the root filesystem is mounted. It's a very minimal environment but allows ip a show, dmesg, and looking at files in the initramfs.
   
-The two main alternatives are:
+The three main alternatives are:
+
+rd.break
 
 systemd.unit=emergency.target
 
@@ -277,10 +279,10 @@ When to use it: Use this as a last resort when other methods fail. It's the most
 
 To use either of these, follow the same initial steps as with rd.break:
 
-    At the GRUB boot menu, press the 'e' key to edit the boot command line.
-
-Navigate to the line that starts with linux.
-
-Append systemd.unit=emergency.target or init=/bin/bash to the end of the line.
+* Reboot the machine with the ISO.
+* At the GRUB (bootloader) menu: As soon as you see the initial boot menu (often "OpenShift Installer" or similar), press an arrow key (up/down) to stop the automatic countdown.
+* At the GRUB boot menu, press the 'e' key to edit the boot command line.
+* Navigate to the line that starts with linux.
+* Append `rd.break` or `rd.break=pre-mount`, `systemd.unit=emergency.target` or `init=/bin/bash` to the end of the line.
 
 Press Ctrl+X or F10 to boot with the modified parameters.

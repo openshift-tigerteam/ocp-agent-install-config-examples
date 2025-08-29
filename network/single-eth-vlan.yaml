@@ -15,12 +15,12 @@ spec:
           enabled: false
         ipv6:
           enabled: false
-      - name: vlan<vlanid
+      - name: vlan<vlanid>
         type: vlan
         state: up
         vlan:
           base-iface: <devicename>
-          id: <vlanid
+          id: <vlanid>
         ipv4:
           enabled: true
           address:
