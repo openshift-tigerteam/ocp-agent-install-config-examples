@@ -136,7 +136,10 @@ vi install-config.yaml  # Add your specific configuration - Need pull secret and
 vi agent-config.yaml    # Add your specific configuration
 ```
 
-> If you have additional manifests to apply at install time, place them in a folder named `cluster-manifests` at the same level as the `install-config.yaml` and `agent-config.yaml`. 
+[Example install-config.yaml](./baremetal/install-config.yaml)   
+[Example agent-config.yaml](./baremetal/agent-config.bond.yaml)    
+
+> If you have additional manifests to apply at install time, place them in a folder named `cluster-manifests` at the same level as the `install-config.yaml` and `agent-config.yaml`. staticip-48-44
 
 ### NTP Setup 
 
@@ -209,7 +212,7 @@ oc delete pods --all-namespaces --field-selector=status.phase=Failed
 * Kubernetes NMState Operator 
 
 ### Setup NNCPs and UDNs
-Create the networks needed... [folder](./network)
+[Create the networks needed](./network/README.md)
 
 ### Install Storage
 Install the storage of your choice....
