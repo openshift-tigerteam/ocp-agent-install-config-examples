@@ -1,7 +1,7 @@
 apiVersion: nmstate.io/v1
 kind: NodeNetworkConfigurationPolicy
 metadata:
-  name: staticip-48-44
+  name: single-eth-vlan
 spec:
   nodeSelector:
     kubernetes.io/hostname: <hostname>
@@ -15,17 +15,17 @@ spec:
           enabled: false
         ipv6:
           enabled: false
-      - name: vlan48
+      - name: vlan<vlanid
         type: vlan
         state: up
         vlan:
           base-iface: <devicename>
-          id: 48
+          id: <vlanid
         ipv4:
           enabled: true
           address:
             - ip: <ipaddress>
-              prefix-length: 24
+              prefix-length: <netmask>
           dhcp: false
         ipv6:
           enabled: false
